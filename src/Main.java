@@ -57,7 +57,7 @@ public class Main {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     array[i][j] = 1;
-                    fileWriter.append( String.valueOf(array[i][j]) + " ");
+                    fileWriter.append( array[i][j] + " ");
                 }
                 fileWriter.append("\n");
             }
