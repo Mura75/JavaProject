@@ -20,6 +20,9 @@ public class ReadFromFile {
             //Vivod teksta
             String text = scanner.nextLine();
             System.out.println(text);
+
+            //Zakrivaem posle ego okonchania
+            fileReader.close();
         }
         catch (Exception e) {
             // Pokaziat teks oshibki esli ona est
