@@ -15,12 +15,14 @@ public class ReadFromFile {
         try {
             //Chtenie s faila
             FileReader fileReader = new FileReader(file);
+
             Scanner scanner = new Scanner(fileReader);
 
-            //Vivod teksta
-            String text = scanner.nextLine();
-            System.out.println(text);
-
+            //Chitaem fail poka ne doidem do konca
+            while (scanner.hasNext()) {
+                //vivodim resultat
+                System.out.println(scanner.nextLine());
+            }
             //Zakrivaem posle ego okonchania
             fileReader.close();
         }
