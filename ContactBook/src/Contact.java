@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Murager on 08.02.2017.
  */
-public class Contact {
+public class Contact implements Serializable {
 
     private int id;
 
