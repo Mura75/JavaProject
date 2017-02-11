@@ -12,10 +12,12 @@ public class ContactBook {
 
         ArrayList<Contact> contactList;
 
-        if (getContactsFromFile() == null) {
+        //Proveriaem esli u nas spisok kontaktov v faile
+        if (getContactsFromFile() == null) { // Esli ego net to sozdaem novii spisok
             contactList = new ArrayList<>();
         }
         else {
+            //Esli on est to prisvaemevaem spisok iz faila k sozdannomu spisku
             contactList = getContactsFromFile();
         }
 
@@ -94,37 +96,48 @@ public class ContactBook {
     }
 
 
-    //Записль списка в файл
+    //Zapis spiske v fail
     public static void writeListToFile(List<Contact> contacts) {
-        //Путь к файлу
+        //put k failu
         String filePath = "D:\\myFile\\Contacts.txt";
         try {
+            //Zapis v fail
             FileOutputStream fos = new FileOutputStream(filePath);
+            //Zapis obiekt (spisok) v fail
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(contacts);
             oos.close();
             System.out.println("Write to file finished");
         } catch (Exception e) {
+            //Esli budet oshibke to pokaziat ee
             System.out.println(e.getMessage());
         }
 
     }
 
 
-    //Чтение списка в файл
+    //Chtenie spiska s faila
     public static ArrayList<Contact> getContactsFromFile() {
+        //Put k failu
         String filePath = "D:\\myFile\\Contacts.txt";
         ArrayList<Contact> contactList;
         try {
+            //Cheteni dannih s faila
             FileInputStream fis = new FileInputStream(filePath);
+            //Chtenie obiektov iz potoke dannih
             ObjectInputStream ois = new ObjectInputStream(fis);
-            contactList = (ArrayList<Contact>)ois.readObject();
+            //Poluchennie obiekto prisvaevaem spisku
+            contactList = (ArrayList<Contact>) ois.readObject();
             ois.close();
+
+            //Vozvrashaiem spisok
             return contactList;
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        //esli nichego net vozvrashiaem NULL
         return null;
     }
 }
