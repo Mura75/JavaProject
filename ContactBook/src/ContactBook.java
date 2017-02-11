@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -6,6 +8,8 @@ import java.util.Scanner;
 public class ContactBook {
 
     public static void main(String[] args) {
+
+        ArrayList<Contact> contactList = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose option:");
@@ -19,9 +23,12 @@ public class ContactBook {
         while (scanner.hasNext()) {
             String menuOption = scanner.nextLine();
             if (menuOption.equals("1")) {
-                createNewContact(scanner);
+                createNewContact(scanner, contactList);
             }
-            if (menuOption.equals("5")) {
+            else if (menuOption.equals("4")) {
+                System.out.println(contactList.toString());
+            }
+            else if (menuOption.equals("5")) {
                 System.out.println("Program stopped");
                 break;
             }
@@ -30,7 +37,7 @@ public class ContactBook {
     }
 
 
-    public static void createNewContact(Scanner scanner) {
+    public static void createNewContact(Scanner scanner, ArrayList<Contact> list) {
         System.out.println("Create new contact");
         Contact contact = new Contact();
         System.out.println("a) Enter name");
@@ -63,6 +70,7 @@ public class ContactBook {
             }
             else if (data.equals("e")) {
                 System.out.println("Contact created!" + "\n\n\n");
+                list.add(contact);
                 System.out.println("1) Create contact" + "\n" +
                         "2) Change contact" + "\n" +
                         "3) Delete contact" + "\n" +
