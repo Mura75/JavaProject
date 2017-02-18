@@ -24,10 +24,11 @@ public class ContactBook {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose option:");
         System.out.println("1) Create contact" + "\n" +
-                           "2) Change contact" + "\n" +
-                           "3) Delete contact" + "\n" +
-                           "4) Show contact list" + "\n" +
-                           "5) Exit");
+                "2) Change contact" + "\n" +
+                "3) Delete contact" + "\n" +
+                "4) Show contact list" + "\n" +
+                "5) Find contact by full name" + "\n" +
+                "6) Exit");
 
 
         while (scanner.hasNext()) {
@@ -39,6 +40,9 @@ public class ContactBook {
                 System.out.println(contactList.toString());
             }
             else if (menuOption.equals("5")) {
+                findContact(scanner, contactList);
+            }
+            else if (menuOption.equals("6")) {
                 System.out.println("Program stopped");
                 break;
             }
@@ -46,6 +50,28 @@ public class ContactBook {
 
     }
 
+    //Poisk kontaktov v spiske po imeni
+    public static void findContact(Scanner scanner, List<Contact> contacts) {
+        System.out.println("Enter a word: ");
+        String subString = scanner.nextLine();
+
+        //Novi spisok resultat
+        List<Contact> resultList = new ArrayList<>();
+
+        //Ciklom "for each" probegaemcia po spisku kontaktov
+        for (Contact contact : contacts) {
+            //Polnoe imia cheloveka
+            String fullName = contact.getName() + " " + contact.getSurname();
+            //Esli v spiske est kontakti kotorie soderzhait takoe sochetanie bukv
+            // to zapisivaem ih v novii spisok
+            if (fullName.contains(subString)) {
+                resultList.add(contact);
+            }
+        }
+
+        //Vividim rezultat
+        System.out.println(resultList.toString());
+    }
 
     public static void createNewContact(Scanner scanner, ArrayList<Contact> list) {
         System.out.println("Create new contact");
