@@ -51,20 +51,25 @@ public class ContactBook {
     }
 
     //Poisk kontaktov v spiske po imeni
-    public static void findContact(Scanner scanner, List<Contact> contacts) {
+    public static void findContact(Scanner scanner, ArrayList<Contact> contacts) {
         System.out.println("Enter a word: ");
         String subString = scanner.nextLine();
 
+        String lowerSub = subString.toUpperCase();
+
+
         //Novi spisok resultat
-        List<Contact> resultList = new ArrayList<>();
+        ArrayList<Contact> resultList = new ArrayList<>();
 
         //Ciklom "for each" probegaemcia po spisku kontaktov
         for (Contact contact : contacts) {
             //Polnoe imia cheloveka
             String fullName = contact.getName() + " " + contact.getSurname();
-            //Esli v spiske est kontakti kotorie soderzhait takoe sochetanie bukv
+            String fullNameLower = fullName.toUpperCase();
+            //Esli v spiske est kontakti kotorie soderzhait
+            // takoe sochetanie bukv
             // to zapisivaem ih v novii spisok
-            if (fullName.contains(subString)) {
+            if (fullNameLower.contains(lowerSub)) {
                 resultList.add(contact);
             }
         }
@@ -138,7 +143,6 @@ public class ContactBook {
             //Esli budet oshibke to pokaziat ee
             System.out.println(e.getMessage());
         }
-
     }
 
 
