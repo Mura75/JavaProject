@@ -37,6 +37,9 @@ public class ContactBook {
             if (menuOption.equals("1")) {
                 createNewContact(scanner, contactList);
             }
+            else if (menuOption.equals("2")) {
+                updateContact(scanner, contactList);
+            }
             else if (menuOption.equals("3")) {
                 deleteContactById(scanner, contactList);
             }
@@ -141,6 +144,84 @@ public class ContactBook {
         Collections.sort(contacts);
         for (Contact c : contacts) {
             System.out.println(c.getSurname() + " " + c.getName());
+        }
+    }
+
+
+    public static void updateContact(Scanner scanner, ArrayList<Contact> contacts) {
+        Collections.sort(contacts);
+        for (Contact c : contacts) {
+            System.out.println(c.toString());
+        }
+
+        System.out.println("\n\n Enter id to find contact and change it:");
+
+        Contact foundContact = null;
+        int position = -1;
+
+
+        for (int i = 0; i < contacts.size(); i++) {
+            try {
+                Integer id = scanner.nextInt();
+                if (id == contacts.get(i).getId()) {
+                    foundContact = contacts.get(i);
+                    position = i;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Wrong number format");
+            }
+        }
+
+        if (foundContact != null && position >= 0) {
+            System.out.println("a) Enter name");
+            System.out.println("b) Enter surname");
+            System.out.println("c) Enter phone");
+            System.out.println("d) Enter email");
+            System.out.println("e) exit");
+            while (scanner.hasNext()) {
+                String data = scanner.nextLine();
+                if (data.equals("a")) {
+                    System.out.println("Enter name:");
+                    String name = scanner.nextLine();
+                    foundContact.setName(name);
+                    System.out.println("Contact name is: " + foundContact.getName());
+                }
+                else if (data.equals("b")) {
+                    System.out.println("Enter surname:");
+                    String surname = scanner.nextLine();
+                    foundContact.setSurname(surname);
+                    System.out.println("Contact surname is: " + foundContact.getSurname());
+                }
+                else if (data.equals("c")) {
+                    System.out.println("Enter phone:");
+                    String phone = scanner.nextLine();
+                    foundContact.setPhone(phone);
+                    System.out.println("Contact phone is: " + foundContact.getPhone());
+                }
+                else if (data.equals("d")) {
+                    System.out.println("Enter email:");
+                    String email = scanner.nextLine();
+                    foundContact.setEmail(email);
+                    System.out.println("Contact email is: " + foundContact.getEmail());
+                }
+                else if (data.equals("e")) {
+                    System.out.println("Contact changed:\n\n\n");
+                    contacts.set(position, foundContact);
+                    writeListToFile(contacts);
+                    System.out.println("1) Create contact" + "\n" +
+                            "2) Change contact" + "\n" +
+                            "3) Delete contact" + "\n" +
+                            "4) Show contact list" + "\n" +
+                            "5) Find contact by full name" + "\n" +
+                            "6) Sort contact" + "\n" +
+                            "7) Exit");
+                    break;
+                }
+            }
+        }
+        else {
+            System.out.println("Contact not exist!!!");
         }
     }
 
