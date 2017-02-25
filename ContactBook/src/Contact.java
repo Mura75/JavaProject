@@ -1,11 +1,10 @@
-package src;
-
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * Created by Murager on 08.02.2017.
  */
-public class Contact implements Serializable {
+public class Contact implements Serializable, Comparable {
 
     private int id;
 
@@ -67,5 +66,14 @@ public class Contact implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        Contact c = (Contact)o;
+        String fullName1 = getSurname() + " " + getName();
+        String fullName2 = c.getSurname() + " " + c.getName();
+        return fullName1.compareTo(fullName2);
     }
 }

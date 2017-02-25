@@ -1,7 +1,7 @@
+import sun.rmi.runtime.Log;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Murager on 08.02.2017.
@@ -28,7 +28,8 @@ public class ContactBook {
                 "3) Delete contact" + "\n" +
                 "4) Show contact list" + "\n" +
                 "5) Find contact by full name" + "\n" +
-                "6) Exit");
+                "6) Sort contact" + "\n" +
+                "7) Exit");
 
 
         while (scanner.hasNext()) {
@@ -43,6 +44,9 @@ public class ContactBook {
                 findContact(scanner, contactList);
             }
             else if (menuOption.equals("6")) {
+                sortedContact(contactList);
+            }
+            else if (menuOption.equals("7")) {
                 System.out.println("Program stopped");
                 break;
             }
@@ -123,6 +127,15 @@ public class ContactBook {
                         "5) Exit");
                 break;
             }
+        }
+    }
+
+
+
+    public static void sortedContact(ArrayList<Contact> contacts) {
+        Collections.sort(contacts);
+        for (Contact c : contacts) {
+            System.out.println(c.getSurname() + " " + c.getName());
         }
     }
 
