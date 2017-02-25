@@ -37,6 +37,9 @@ public class ContactBook {
             if (menuOption.equals("1")) {
                 createNewContact(scanner, contactList);
             }
+            else if (menuOption.equals("3")) {
+                deleteContactById(scanner, contactList);
+            }
             else if (menuOption.equals("4")) {
                 System.out.println(contactList.toString());
             }
@@ -124,7 +127,9 @@ public class ContactBook {
                         "2) Change contact" + "\n" +
                         "3) Delete contact" + "\n" +
                         "4) Show contact list" + "\n" +
-                        "5) Exit");
+                        "5) Find contact by full name" + "\n" +
+                        "6) Sort contact" + "\n" +
+                        "7) Exit");
                 break;
             }
         }
@@ -137,6 +142,33 @@ public class ContactBook {
         for (Contact c : contacts) {
             System.out.println(c.getSurname() + " " + c.getName());
         }
+    }
+
+
+    //Udalenie kontakta po id
+    public static void deleteContactById(Scanner scanner, ArrayList<Contact> contacts) {
+        Collections.sort(contacts);
+        for (Contact c : contacts) {
+            System.out.println(c.toString());
+        }
+
+        System.out.println("\n\n Enter id to delete contact:");
+        try {
+            Integer id = scanner.nextInt();
+            for (int i = 0; i < contacts.size(); i++) {
+                if (id == contacts.get(i).getId()) {
+                    Contact contactToRemove = contacts.get(i);
+                    contacts.remove(contactToRemove);
+                    writeListToFile(contacts);
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Wrong number format");
+        }
+
+
     }
 
 

@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.UUID;
 
 /**
  * Created by Murager on 08.02.2017.
@@ -17,12 +18,13 @@ public class Contact implements Serializable, Comparable {
     private String email;
 
 
-    public int getId() {
-        return id;
+    //Generiruem novii id
+    public Contact() {
+        id = Math.abs(UUID.randomUUID().hashCode());
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -59,13 +61,11 @@ public class Contact implements Serializable, Comparable {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "id=" + id +
+        return "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+                ", email='" + email + '\'';
     }
 
 
